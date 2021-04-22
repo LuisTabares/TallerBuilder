@@ -86,9 +86,11 @@ public class Dish {
             int price = part.getPrice();
             
             //Si es una porcion media el valor se divide a la mitad solo si es una base o un acompañante
-            //Porque la bebida, el postre y la entrada siempre son porciones enteras
-            if (this.getSize() == EnumSize.HALF & part.getType() == EnumComponent.BASE  & part.getType() == EnumComponent.COMPANION) {
-                price /= 2;
+            //Porque la bebida, el postre y la entrada son porciones enteras asi el plato sea medio
+            if (this.getSize() == EnumSize.HALF) {
+                if (part.getType() == EnumComponent.BASE  || part.getType() == EnumComponent.COMPANION) {
+                    price /= 2;
+                }
             }
             
             partsPrice += price;

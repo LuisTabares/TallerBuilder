@@ -40,7 +40,7 @@ public class OrientalDishBuilder extends DishBuilder {
             System.out.println("Por favor ingrese la descripcion del plato: ");
             String dishDescription = in.nextLine().trim();
             this.getDish().setDescription(dishDescription);
-            if (this.getDish().getName().isEmpty()){
+            if (this.getDish().getDescription().isEmpty()){
                 System.out.println("Debe ingresar un valor");
             }
         } while (this.getDish().getDescription().isEmpty());
@@ -48,7 +48,7 @@ public class OrientalDishBuilder extends DishBuilder {
         do {
             System.out.println("Por favor ingrese la direccion de la foto del plato: ");
             String dishImage = in.nextLine().trim();
-            this.getDish().setDescription(dishImage);
+            this.getDish().setImage(dishImage);
             if (this.getDish().getImage().isEmpty()){
                 System.out.println("Debe ingresar un valor");
             }
@@ -61,26 +61,26 @@ public class OrientalDishBuilder extends DishBuilder {
         String mensaje = ("Por favor ingrese el id de la entrada, o oprima enter para no agregarla");
         this.addPart(mensaje);
         
-        mensaje = ("Por favor ingrese el id de la base");
-        this.addPart(mensaje);
         
-        mensaje = ("Por favor ingrese el id del acompañante");
-        this.addPart(mensaje);
-
-        Scanner in = new Scanner(System.in);        
+        while (true) {
+            mensaje = ("Por favor ingrese el id de la base");
+            if (this.addPart(mensaje)) {
+                break;
+            }
+            else {
+                System.out.println("Debe agregar una base");
+            }
+        }
+               
         boolean agregarOtro = true;
         while (agregarOtro) {
-            mensaje = ("Por favor ingrese el nombre de otro acompañante, o si no quiere mas oprima enter");
-            this.addPart(mensaje);
-                
-            System.out.println("Desea agregar otro acompañante?(Y/N): ");
-            String respuesta = in.nextLine().trim().toLowerCase();
-            if (!"y".equals(respuesta)) {
-                agregarOtro =  false;
+            mensaje = ("Por favor ingrese el nombre de un acompañante, o oprima enter para no agregar mas acompañantes");
+            if (!this.addPart(mensaje)) {
+                agregarOtro = false;
             }
         }
         
-        mensaje = ("Por favor ingrese el id de la bebida");
+        mensaje = ("Por favor ingrese el id de la bebida, o oprima enter para no agregarla");
         this.addPart(mensaje);
         
         mensaje = ("Por favor ingrese el id del postre, o oprima enter para no agregarlo");
@@ -91,12 +91,20 @@ public class OrientalDishBuilder extends DishBuilder {
     public void setSize() {
         Scanner in = new Scanner(System.in);
         
-        System.out.println("Por favor ingrese el tamaño del plato: ALL - HALF");
-        String dishSize = in.nextLine().trim();
-        this.getDish().setSize(EnumSize.valueOf(dishSize));
+        while (this.getDish().getSize() == null) {
+            System.out.println("Por favor ingrese el tamaño del plato: ALL - HALF");
+            String dishSize = in.nextLine().trim().toUpperCase();
+            try {
+                this.getDish().setSize(EnumSize.valueOf(dishSize));
+            } catch (Exception e) {
+                System.out.println("El valor ingresado no corresponde a un tamaño");
+            }
+        }
     }
 
-    private void addPart(String mensaje) {
+    private boolean addPart(String mensaje) {
+        boolean partAdded = false;
+        
         IComponentRepository repo = Factory.getInstance().getCustomerService();
         ComponentService componentService = new ComponentService(repo);
         
@@ -112,16 +120,24 @@ public class OrientalDishBuilder extends DishBuilder {
                 part = componentService.findComponent(partId);
                 if (part != null) {
                     this.getDish().addPart(part);
+                    partAdded = true;
                 }
                 else {
                     System.out.println("El valor ingresado no es un id valido");
+                    partAdded = this.addPart(mensaje);
                 }
+            }
+            else if (respuesta.isEmpty()) {
+                System.out.println("Parte no agregada");
             }
             else {
                 System.out.println("El valor que ingreso no es numerico");
+                partAdded = this.addPart(mensaje);
             }
         } catch (Exception ex) {
             Logger.getLogger(OrientalDishBuilder.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        return partAdded;
     }
 }
