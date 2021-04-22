@@ -1,22 +1,30 @@
-ARROZ ORIENTAL
+PLATO ORIENTAL
 
 Nombre: Arroz oriental
 Descripcion: Arroz con estilo oriental, añadiendo ingredientes con sabores orientales como la soja, las verduras y las gambas
-Direccion imagen: C:\Users\Luis Tabares\Documents\NetBeansProjects\TallerBuilder_Consola\orientalDishPicture
+Direccion imagen: C:\Users\Luis Tabares\Documents\NetBeansProjects\TallerBuilder_Consola\orientalDishPicture.png
 
 Entrada: 16
 Base: 17
 Acompañante: 18
 Acompañante: 19
+Acompañante: sin mas acompañantes (enter)
 Bebida: 20
 Postre: 21
 
 Tamaño porcion: ALL
 
-ARROZ ITALIANO
+PLATO ITALIANO
 
+Nombre: Ossobuco
+Descripcion: Especialidad de la cocina lombarda, piernas de ternera cortadas en cruz estofadas con verduras, vino blanco y caldo.
+Direccion imagen: C:\Users\Luis Tabares\Documents\NetBeansProjects\TallerBuilder_Consola\italianDishPicture.png
 
-todo:
-que el nombre, descripcion imagen tamaño, no sean cadenas vacias y los tiene que ingresar (loop)
+Base: 23
+Acompañante: 24
+Acompañante: 25
+Acompañante: sin mas acompañantes (enter)
+Bebida: 26
+Postre: 27
 
-que hay de las partes? tambien son obligatorias?
+Tamaño porcion: ALL
