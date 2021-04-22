@@ -13,6 +13,7 @@ import co.unicauca.tallerbuilder.dominio.Dish;
 import co.unicauca.tallerbuilder.dominio.DishBuilder;
 import co.unicauca.tallerbuilder.dominio.DishDirector;
 import co.unicauca.tallerbuilder.dominio.EnumComponent;
+import co.unicauca.tallerbuilder.dominio.ItalianDishBuilder;
 import co.unicauca.tallerbuilder.dominio.OrientalDishBuilder;
 
 /**
@@ -30,11 +31,12 @@ public class ClientMain {
         
         ClientMain.probarImplementacionPlatoOriental();
         
-        //ClientMain.probarImplementacionPlatoItaliano();
+        ClientMain.probarImplementacionPlatoItaliano();
     }
 
     public static void insertInitialComponents() throws Exception {
         //Creando componentes iniciales
+        
         IComponentRepository repo = Factory.getInstance().getCustomerService();
         ComponentService componentService = new ComponentService(repo);
         
@@ -55,27 +57,58 @@ public class ClientMain {
         
         component = new Component(21, "Nian Gao", 8000, EnumComponent.DESSERT);
         componentService.saveComponent(component);
+        
+        
+ 
+        component = new Component(23, "Ossobuco", 8000, EnumComponent.BASE);
+        componentService.saveComponent(component);
+        
+        component = new Component(24, "Risotto alla milanese", 7000, EnumComponent.COMPANION);
+        componentService.saveComponent(component);
+        
+        component = new Component(25, "Gremolata", 7000, EnumComponent.COMPANION);
+        componentService.saveComponent(component);
+        
+        component = new Component(26, "Glass of marsala wine", 9000, EnumComponent.DRINK);
+        componentService.saveComponent(component);
+        
+        component = new Component(27, "Panettone", 10000, EnumComponent.DESSERT);
+        componentService.saveComponent(component);        
     }
 
     private static void probarImplementacionPlatoOriental() {
-        System.out.println("Creando arroz oriental");
+        System.out.println("Creando plato oriental");
         DishDirector director = new DishDirector();
         DishBuilder orientalDishBuilder = new OrientalDishBuilder();
         director.setDishBuilder(orientalDishBuilder);
         director.buildDish();
         
         Dish dish = director.getDish();
-        System.out.println("\nImprimiendo arroz oriental: "
+        System.out.println("\nImprimiendo plato oriental: "
                            + "\nNombre: " + dish.getName()
                            + "\nDescripcion: " + dish.getDescription()
                            + "\nImagen: " + dish.getImage()
                            + "\nTamaño: " + dish.getSize()
         );
         System.out.println("Sus partes: " + dish.getPartsNames());
-        System.out.println("Precio de las partes: " + dish.calculatePriceParts());
+        System.out.println("Precio de las partes: " + dish.calculatePriceParts() + "\n");
     }
 
     private static void probarImplementacionPlatoItaliano() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Creando plato italiano");
+        DishDirector director = new DishDirector();
+        DishBuilder italianDishBuilder = new ItalianDishBuilder();
+        director.setDishBuilder(italianDishBuilder);
+        director.buildDish();
+        
+        Dish dish = director.getDish();
+        System.out.println("\nImprimiendo plato italiano: "
+                           + "\nNombre: " + dish.getName()
+                           + "\nDescripcion: " + dish.getDescription()
+                           + "\nImagen: " + dish.getImage()
+                           + "\nTamaño: " + dish.getSize()
+        );
+        System.out.println("Sus partes: " + dish.getPartsNames());
+        System.out.println("Precio de las partes: " + dish.calculatePriceParts() + "\n");
     }
 }

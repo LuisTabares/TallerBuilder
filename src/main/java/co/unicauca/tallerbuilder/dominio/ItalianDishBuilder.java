@@ -16,9 +16,9 @@ import java.util.logging.Logger;
  *
  * @author Luis Tabares
  */
-public class OrientalDishBuilder extends DishBuilder {
+public class ItalianDishBuilder extends DishBuilder {
 
-    public OrientalDishBuilder(){
+    public ItalianDishBuilder(){
         Dish dish = new Dish();
         this.setDish(dish);
     }
@@ -58,9 +58,7 @@ public class OrientalDishBuilder extends DishBuilder {
     @Override
     public void addParts() {
         
-        String mensaje = ("Por favor ingrese el id de la entrada, o oprima enter para no agregarla");
-        this.addPart(mensaje);
-        
+        String mensaje;
         
         while (true) {
             mensaje = ("Por favor ingrese el id de la base");
