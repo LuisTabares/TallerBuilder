@@ -1,0 +1,9 @@
+co\unicauca\tallerbuilder\dominio\Protected.class
+co\unicauca\tallerbuilder\dominio\ComponentService.class
+co\unicauca\tallerbuilder\dominio\DishBuilder.class
+co\unicauca\tallerbuilder\dominio\Component.class
+co\unicauca\tallerbuilder\dominio\Dish.class
+co\unicauca\tallerbuilder\dominio\EnumComponent.class
+co\unicauca\tallerbuilder\presentacion\ClientMain.class
+co\unicauca\tallerbuilder\access\IComponentRepository.class
+co\unicauca\tallerbuilder\dominio\EnumSize.class
